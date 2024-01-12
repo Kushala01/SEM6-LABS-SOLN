@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Move Table and Image</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      margin-bottom: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid black;
+      padding: 8px;
+    }
+
+    /* Alternate row colors */
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  </style>
+  <script src="C:\Users\IT\Desktop\210905189\Lab-1\jquery-3.7.1.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      $("#moveButton").click(function() {
+        // Animate the movement of the table and image from right to left
+        $("#myTable, #myImage").animate({ "marginLeft": "+=100px" }, "slow");
+      });
+    });
+  </script>
+</head>
+<body>
+  <button id="moveButton">Move Table and Image</button>
+  <table id="myTable">
+    <tr><td>Data 1</td><td>Data 2</td><td>Data 3</td></tr>
+    <tr><td>Data 4</td><td>Data 5</td><td>Data 6</td></tr>
+    <tr><td>Data 7</td><td>Data 8</td><td>Data 9</td></tr>
+  </table>
+
+  <img id="myImage" src="IMAGE.jpg" alt="Your Image" style="width: 200px; height: auto;">
+</body>
+</html>
