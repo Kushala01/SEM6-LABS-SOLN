@@ -1,6 +1,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <string.h>
+#define MPI_COMM_WORLD MCW
 
 int main(int argc, char* argv[]) {
     int rank, size;
@@ -10,8 +11,8 @@ int main(int argc, char* argv[]) {
     int i, n, l;
     char str[100], c[100];
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MCW, &rank);
+    MPI_Comm_size(MCW, &size);
 
     if (rank == 0) {
         n = size;
@@ -20,19 +21,18 @@ int main(int argc, char* argv[]) {
         l = strlen(str) / n;
     }
 
-    MPI_Bcast(&l, 1, MPI_INT, 0, MPI_COMM_WORLD);
-    MPI_Scatter(str, l, MPI_CHAR, c, l, MPI_CHAR, 0, MPI_COMM_WORLD);
+    MPI_Bcast(&l, 1, MPI_INT, 0, MCW);
+    MPI_Scatter(str, l, MPI_CHAR, c, l, MPI_CHAR, 0, MCW);
     count = 0;
     for (i = 0; i < l; ++i) {
         if (c[i] == 'a' || c[i] == 'e' || c[i] == 'i' || c[i] == 'o' || c[i] == 'u' ||
-            c[i] == 'A' || c[i] == 'E' || c[i] == 'I' || c[i] == 'O' || c[i] == 'U') {
+            c[i] == 'A' || c[i] == 'E' || c[i] == 'I' || c[i] == 'O' || c[i] == 'U') 
             continue;
-        }
         count += 1;
     }
 
     printf("Process %d Count = %d\n", rank, count);
-    MPI_Gather(&count, 1, MPI_INT, b, 1, MPI_INT, 0, MPI_COMM_WORLD);
+    MPI_Gather(&count, 1, MPI_INT, b, 1, MPI_INT, 0, MCW);
 
     if (rank == 0) {
         int tcount = 0;
