@@ -1,16 +1,14 @@
 #include <mpi.h>
 #include <stdio.h>
-
 #define MAX_M 100
 #define MAX_N 100
+#define MPI_COMM_WORLD MCW
 
-int main(int argc, char *argv[]) 
-{
+int main(int argc, char *argv[]) {
     int rank, size;
-
     MPI_Init(&argc, &argv);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
+    MPI_Comm_rank(MCW, &rank);
+    MPI_Comm_size(MCW, &size);
 
     int n, M;
     int sendBuf[MAX_M * MAX_N];
@@ -26,15 +24,13 @@ int main(int argc, char *argv[])
             scanf("%d", &sendBuf[i]);
     } 
 
-    MPI_Bcast(&M, 1, MPI_INT, 0, MPI_COMM_WORLD); 
-    MPI_Scatter(sendBuf, M, MPI_INT, recvBuf, M, MPI_INT, 0, MPI_COMM_WORLD);
-
+    MPI_Bcast(&M, 1, MPI_INT, 0, MCW); 
+    MPI_Scatter(sendBuf, M, MPI_INT, recvBuf, M, MPI_INT, 0, MCW);
     double average = 0.0;
     for (int i = 0; i < M; ++i) 
         average += recvBuf[i];
     average /= M;
-
-    MPI_Gather(&average, 1, MPI_DOUBLE, averages, 1, MPI_DOUBLE, 0, MPI_COMM_WORLD);
+    MPI_Gather(&average, 1, MPI_DOUBLE, averages, 1, MPI_DOUBLE, 0, MCW);
 
     if (rank == 0) {
         double totalAverage = 0.0;
