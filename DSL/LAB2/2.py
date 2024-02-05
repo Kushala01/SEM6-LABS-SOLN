@@ -1,5 +1,4 @@
 # Program to print negative numbers in a list using while loop
-
 # Sample list of numbers
 numbers = [10, -5, 8, -3, -7, 12, -15, 20]
 
