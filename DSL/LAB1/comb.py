@@ -63,7 +63,6 @@ for num in my_list:
         print(num)
 
 #Q9.Write a Python program to count positive and negative numbers in a List.
-
 my_list = [11, -21, 0, 45, 66, -93]
 positive_count = 0
 negative_count = 0
@@ -76,7 +75,6 @@ print("Positive Numbers:", positive_count)
 print("Negative Numbers:", negative_count)
 
 #Q10.Write a Python program to remove all even elements from a list.
-
 my_list = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 my_list = [num for num in my_list if num % 2 != 0]
 print("List after removing even elements:", my_list)
