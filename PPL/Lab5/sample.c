@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <CL/cl.h>
 #include <stdlib.h>
-
 #define max_src_size (0x100000)
 
 int main(void){
@@ -10,16 +9,19 @@ int main(void){
     printf("Enter number of elements: ");
     scanf("%d", &n);
 
-    printf("Enter the elements: ");
     int *a = (int *)malloc(sizeof(int) * n);
     for (i = 0; i < n; i++)
-        scanf("%d", &a[i]);
+        a[i] = i;
+    int *b = (int *)malloc(sizeof(int) * n);
+    for (i = 0; i < n; i++)
+        b[i] = i + 10;
 
     // load kernel src code
     FILE *f;
     char *src;
     size_t src_n;
-    f = fopen("q1.cl", "r");
+    f = fopen("vectorCLKernel.cl", "r");
+
     if (!f){
         fprintf(stderr, "Failed to load kernel!\n");
         getchar();
@@ -47,10 +49,12 @@ int main(void){
 
     // Create memory buffers on device for each vector
     cl_mem a_mem_obj = clCreateBuffer(context, CL_MEM_READ_ONLY, n * sizeof(int), NULL, &ret);
+    cl_mem b_mem_obj = clCreateBuffer(context, CL_MEM_READ_ONLY, n * sizeof(int), NULL, &ret);
     cl_mem c_mem_obj = clCreateBuffer(context, CL_MEM_READ_ONLY, n * sizeof(int), NULL, &ret);
 
-    // copy lists a to resp memory buffer
+    // copy lists a and b to resp memory buffers
     ret = clEnqueueWriteBuffer(cmdqueue, a_mem_obj, CL_TRUE, 0, n * sizeof(int), a, 0, NULL, NULL);
+    ret = clEnqueueWriteBuffer(cmdqueue, b_mem_obj, CL_TRUE, 0, n * sizeof(int), b, 0, NULL, NULL);
 
     // create program from the kernel src
     cl_program program = clCreateProgramWithSource(context, 1, (const char **)&src, (const size_t *)&src_n, &ret);
@@ -59,11 +63,12 @@ int main(void){
     ret = clBuildProgram(program, 1, &did, NULL, NULL, NULL);
 
     // Create the OpenCL kernel object
-    cl_kernel kernel = clCreateKernel(program, "octal", &ret);
+    cl_kernel kernel = clCreateKernel(program, "vector_add", &ret);
 
     // Set the args of the kernel
     ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&a_mem_obj);
-    ret = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *)&c_mem_obj);
+    ret = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *)&b_mem_obj);
+    ret = clSetKernelArg(kernel, 2, sizeof(cl_mem), (void *)&c_mem_obj);
 
     // execute the OpenCL kernel on the array
     size_t global_item_n = n;
@@ -79,17 +84,18 @@ int main(void){
 
     // Display the result to the screen
     for (i = 0; i < n; i++)
-        printf("Octal of %d is %d\n", a[i], c[i]);
+        printf("%d+%d= %d\n", a[i], b[i], c[i]);
     // Clean UP
     ret = clFlush(cmdqueue);
     ret = clReleaseKernel(kernel);
     ret = clReleaseProgram(program);
     ret = clReleaseMemObject(a_mem_obj);
+    ret = clReleaseMemObject(b_mem_obj);
     ret = clReleaseMemObject(c_mem_obj);
     ret = clReleaseCommandQueue(cmdqueue);
     ret = clReleaseContext(context);
-
     free(a);
+    free(b);
     free(c);
     getchar();
     return 0;

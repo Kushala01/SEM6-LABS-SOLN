@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <CL/cl.h>
 #include <stdlib.h>
-
 #define max_src_size (0x100000)
 
 int main(void){
@@ -19,7 +18,7 @@ int main(void){
     FILE *f;
     char *src;
     size_t src_n;
-    f = fopen("q1.cl", "r");
+    f = fopen("q4.cl", "r");
     if (!f){
         fprintf(stderr, "Failed to load kernel!\n");
         getchar();
@@ -59,7 +58,7 @@ int main(void){
     ret = clBuildProgram(program, 1, &did, NULL, NULL, NULL);
 
     // Create the OpenCL kernel object
-    cl_kernel kernel = clCreateKernel(program, "octal", &ret);
+    cl_kernel kernel = clCreateKernel(program, "decimal", &ret);
 
     // Set the args of the kernel
     ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&a_mem_obj);
@@ -79,7 +78,7 @@ int main(void){
 
     // Display the result to the screen
     for (i = 0; i < n; i++)
-        printf("Octal of %d is %d\n", a[i], c[i]);
+        printf("Decimal of %d is %d\n", a[i], c[i]);
     // Clean UP
     ret = clFlush(cmdqueue);
     ret = clReleaseKernel(kernel);

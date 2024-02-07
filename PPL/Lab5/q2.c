@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <CL/cl.h>
 #include <stdlib.h>
-
 #define max_src_size (0x100000)
 
 int main(void){
@@ -10,7 +9,7 @@ int main(void){
     printf("Enter number of elements: ");
     scanf("%d", &n);
 
-    printf("Enter the elements: ");
+    printf("Enter the binary elements: ");
     int *a = (int *)malloc(sizeof(int) * n);
     for (i = 0; i < n; i++)
         scanf("%d", &a[i]);
@@ -19,7 +18,7 @@ int main(void){
     FILE *f;
     char *src;
     size_t src_n;
-    f = fopen("q1.cl", "r");
+    f = fopen("q2.cl", "r");
     if (!f){
         fprintf(stderr, "Failed to load kernel!\n");
         getchar();
@@ -59,11 +58,12 @@ int main(void){
     ret = clBuildProgram(program, 1, &did, NULL, NULL, NULL);
 
     // Create the OpenCL kernel object
-    cl_kernel kernel = clCreateKernel(program, "octal", &ret);
+    cl_kernel kernel = clCreateKernel(program, "comp", &ret);
 
     // Set the args of the kernel
     ret = clSetKernelArg(kernel, 0, sizeof(cl_mem), (void *)&a_mem_obj);
     ret = clSetKernelArg(kernel, 1, sizeof(cl_mem), (void *)&c_mem_obj);
+    // 0, 1 , 2 ....NUMBERS NEED TO BE CONSECUTIVE ELSE IT WILL NOT WORK!!!!!
 
     // execute the OpenCL kernel on the array
     size_t global_item_n = n;
@@ -79,7 +79,7 @@ int main(void){
 
     // Display the result to the screen
     for (i = 0; i < n; i++)
-        printf("Octal of %d is %d\n", a[i], c[i]);
+        printf("One's complement of %d is %d\n", a[i], c[i]);
     // Clean UP
     ret = clFlush(cmdqueue);
     ret = clReleaseKernel(kernel);
