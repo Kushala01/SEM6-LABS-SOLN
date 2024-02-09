@@ -26,8 +26,6 @@ int main(int argc, char** argv) {
         break; // Break out of loop after toggling one character
     }
 }
-
-
     MPI_Finalize();
     return 0;
 }

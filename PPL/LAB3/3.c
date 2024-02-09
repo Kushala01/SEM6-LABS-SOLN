@@ -39,6 +39,5 @@ int main(int argc, char* argv[]) {
         for (i = 0; i < n; i++)
             tcount += b[i];
         printf("Total non-vowels = %d\n", tcount);
-    }
-    MPI_Finalize();
+    } MPI_Finalize();
 }

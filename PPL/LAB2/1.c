@@ -22,8 +22,7 @@ int main (int argc, char *argv []){
     printf("Process %d sent: %s\n", rank, word);
     MPI_Recv(word, len, MPI_CHAR, 1, 102, MPI_COMM_WORLD, &status);
     printf("Process %d received: %s\n", rank, word);
-    }
-    else {
+    }else {
         MPI_Recv(y, len, MPI_CHAR, 0, 101, MPI_COMM_WORLD, &status);
         printf("Process %d received: %s\n", rank, y);
         for (int i = 0; i < strlen(y); i++){
@@ -31,8 +30,7 @@ int main (int argc, char *argv []){
             y[i] += 32;
             else if (y[i] >= 'a' && y[i] <= 'z')
             y[i] -= 32;
-        }
-        sleep(1);
+        } sleep(1);
         MPI_Ssend(y, len, MPI_CHAR, 0, 102, MPI_COMM_WORLD);
         printf("Process %d sent: %s\n", rank, y);
         }

@@ -21,13 +21,12 @@ int main(int argc, char *argv[]) {
         for (i = 0; i < n; ++i)
             scanf("%lld", &arr[i]);
     }
-
     MPI_Scatter(arr, 1, MPI_LONG_LONG, &rec, 1, MPI_LONG_LONG, 0, MCW);
     printf("Process [%d] received = %lld.\n", rank, rec);
     fact = 1;
+
     for (i = 2; i <= rec; ++i)
         fact *= i;
-
     MPI_Gather(&fact, 1, MPI_LONG_LONG, facts, 1, MPI_LONG_LONG, 0, MCW);
 
     if (rank == 0) {
@@ -36,10 +35,8 @@ int main(int argc, char *argv[]) {
         for (i = 0; i < n; ++i) {
             sum += facts[i];
             printf("%lld %s", facts[i], (i != n - 1) ? "+ " : " ");
-        }
-        printf(" = %lld\n", sum);
+        }printf(" = %lld\n", sum);
     }
-
     MPI_Finalize();
     return 0;
 }

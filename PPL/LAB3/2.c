@@ -38,7 +38,6 @@ int main(int argc, char *argv[]) {
             totalAverage += averages[i];
         totalAverage /= n;
         printf("Total average = %lf\n", totalAverage);
-    }
-    MPI_Finalize();
+    }MPI_Finalize();
     return 0;
 }

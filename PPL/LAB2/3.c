@@ -20,16 +20,13 @@ int main(int argc, char *argv[]){
         for (int i = 0; i < size - 1; i++)
             MPI_Bsend(&array[i], 1, MPI_INT, i + 1, i + 1, MCW);
         MPI_Buffer_detach(&buffer, &buffer_size);
-    }
-    else
-    {
+    }else{
         int num;
         MPI_Recv(&num, 1, MPI_INT, 0, rank, MCW, &status);
         if (rank % 2 == 0)
             printf("Received digit: %d in process: %d, cube value : %d\n", num, rank, num * num * num);
         else
             printf("Received digit: %d in process: %d, square value : %d\n", num, rank, num * num);
-    }
-    MPI_Finalize();
+    } MPI_Finalize();
     return 0;
 }
