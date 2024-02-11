@@ -17,5 +17,22 @@ str = "this is string example wow!!!"
 print (str.capitalize())
 print(str)
 
-str = "this is string example ... wow!!!";
+str = "this is string example ... wow!!!"
 print (str.swapcase())
+print(str.upper())
+print(str.lower())
+print(str.find('h')+1)
+print(str.replace("this","bitxh"))
+#are changes in python string inmutable?
+print('string' in str)
+
+
+print(10+3)
+print(10-3)
+print(10*3)
+print(10/3)
+print(10//3)
+print(10%3)
+print(10**3)#to the power
+x=10
+x+=3
