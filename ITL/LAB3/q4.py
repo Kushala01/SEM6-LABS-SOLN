@@ -10,5 +10,5 @@ for i in range(len(words)-1):
     temp = words[i]
     words[i] = words[min]
     words[min] = temp
-
 print(words)
+#selection sort

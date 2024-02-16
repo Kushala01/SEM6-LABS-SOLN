@@ -10,13 +10,16 @@ def binary_search(arr, low, high, x):
             return binary_search(arr, mid + 1, high, x)
     else:
         return -1
+def main():
+    arr = [ 2, 3, 4, 10, 40 ]
+    x = int(input('Enter number to be searched: '))
 
-arr = [ 2, 3, 4, 10, 40 ]
-x = int(input('Enter number to be searched: '))
+    result = binary_search(arr, 0, len(arr)-1, x)
 
-result = binary_search(arr, 0, len(arr)-1, x)
+    if result != -1:
+        print("Element is present at index", str(result))
+    else:
+        print("Element is not present in array")
 
-if result != -1:
-    print("Element is present at index", str(result))
-else:
-    print("Element is not present in array")
+if __name__ == '__main__':
+    main() 
