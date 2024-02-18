@@ -1,9 +1,10 @@
+#Write a TCP/UDP peer to peer chat system between two different machines.
 import socket
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 31621    # Port to listen on (non-privileged ports are > 1023)
+HOST = '172.16.59.36'
+PORT = 31621
 s = socket.socket()
 name = input(str("\nEnter your name: "))
-print("\nTryingto connect to ", HOST, "(", PORT, ")\n")
+print("\nTrying to connect to ", HOST, "(", PORT, ")\n")
 s.connect((HOST, PORT))
 print("Connected...\n")
 s.send(name.encode())

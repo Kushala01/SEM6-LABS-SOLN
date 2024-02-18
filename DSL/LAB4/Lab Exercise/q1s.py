@@ -1,18 +1,13 @@
+#Write a UDP time server to display the current time and day.
 import socket
-HOST = '127.0.0.1'  # Standard loopback interface address (localhost)
-PORT = 2053  # Port to listen on (non-privileged ports are > 1023)
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-    s.bind((HOST, PORT))
-    s.listen()
-    conn, addr = s.accept()
-    with conn:
-        print('Connected by', addr)
-        while True:
-            data = conn.recv(1024)
-            if data:
-                print("Client: ", data.decode())
-                data = input("Enter message to client:")
-            if not data:
-                break
-            conn.sendall(bytearray(data, 'utf-8'))
-    conn.close()
+import time
+s = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+host = '127.0.0.1'
+port = 6996
+s.bind((host,port))
+while True:
+    data,addr  =s.recvfrom(1024)
+    print('Got Connection from : ',str(addr))
+    Time = time.ctime(time.time())+"\r\n"
+    s.sendto(Time.encode(),addr)
+s.close()
