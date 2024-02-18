@@ -1,33 +1,76 @@
 import pandas as pd
 from IPython.display import display
 
+# Load data from a CSV file into a DataFrame
 data = pd.read_csv("ans.csv", sep='\t')
 
-print(data.head())  # Printing the first few rows of the DataFrame
-print(data.tail(2))  # Printing the last two rows of the DataFrame
+# Print the first few rows of the DataFrame
+print(data.head())
 
-filteredRow = data[data['name'] == 'batman']  # Filtering rows where 'name' is 'batman'
-print(filteredRow)  # Printing the filtered rows
+# Print the last two rows of the DataFrame
+print(data.tail(2))
 
-replaced_row = data.replace('batman', 'spyderman')  # Replacing 'batman' with 'spyderman'
-print(replaced_row)  # Printing the DataFrame with replacements
+# Print statistical summary of the DataFrame
+print('Describe: \n\n\n\n\n\n', data.describe())
 
-remove_col = data.drop('name', axis=1)  # Removing the 'name' column
-print(remove_col)  # Printing the DataFrame with the column removed
+# Transpose the DataFrame (swap rows and columns)
+print(data.T)
 
-print(data)  # Printing the original DataFrame to show it's unchanged
+# Filter rows where the 'name' column equals 'batman'
+filteredRow = data[data['name'] == 'batman']
+print(filteredRow)
 
-remove_row = data.iloc[1:2]  # Removing the row at index 1
-print(remove_row)  # Printing the removed row
+# Replace occurrences of 'batman' with 'spyderman' in the DataFrame
+replaced_row = data.replace('batman', 'spyderman')
+print(replaced_row)
 
-print(type(data))  
+# Remove the 'name' column from the DataFrame
+remove_col = data.drop('name', axis=1)
+print(remove_col)
 
-new_row = {'name': 'kushu', 'hieght': 121, 'weight': 33, 'bmi': 12}  # New row data
-#new_row_added = data.append(new_row, ignore_index=True)  # Appending the new row to the DataFrame
-new_row_added = pd.concat([data, pd.DataFrame([new_row])], ignore_index=True)  # Appending the new row to the DataFrame
-print(new_row_added)  # Printing the DataFrame with the new row added
+# Print the original DataFrame to show it's unchanged
+print(data)
 
-new_data=data.drop_duplicates(subset='name')
+# Remove the row at index 1 from the DataFrame
+remove_row = data.iloc[1:2]
+print(remove_row)
 
-df=pd.DataFrame(data,index=['rank1','rank2','rank3'])
+# Check the type of the DataFrame
+print(type(data))
+
+# Define a new row of data
+new_row = {'name': 'kushu', 'hieght': 121, 'weight': 33, 'bmi': 12}
+
+# Append the new row to the DataFrame
+new_row_added = pd.concat([data, pd.DataFrame([new_row])], ignore_index=True)
+print(new_row_added)
+
+# Drop duplicate rows based on the 'name' column
+new_data = data.drop_duplicates(subset='name')
+
+# Create a new DataFrame with custom index labels
+df = pd.DataFrame(data, index=['rank1', 'rank2', 'rank3'])
+
+# Display the DataFrame with custom index labels
 display(df)
+
+# Sort the DataFrame by columns in descending order
+data.sort_index(axis=1, ascending=False)
+print(data)
+
+# Sort the DataFrame by values in the 'name' column
+data.sort_values(by='name')
+print(data)
+
+# Fetch the entire 1st row of the DataFrame
+data.iloc[0]
+
+# Fetch the 1st row and the first 2 columns of the DataFrame
+data.iloc[0, :2]
+print(data.iloc[0, 0])
+
+# Select the 'name' column of the DataFrame
+print(data['name'])
+
+# Select the 'name' and 'bmi' columns of the DataFrame, with the first row
+print(data[['name', 'bmi']][:1])

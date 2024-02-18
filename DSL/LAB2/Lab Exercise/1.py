@@ -1,5 +1,4 @@
 # Program to demonstrate while loop with else
-
 # Initialize a counter
 counter = 0
 
