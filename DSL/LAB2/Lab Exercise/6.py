@@ -10,9 +10,10 @@ df = pd.DataFrame(data)
 
 # Insert a column 'Total' and calculate the total marks
 df['Total'] = df[['Quiz_1', 'In_Sem_1', 'Quiz_2', 'In_Sem_2']].sum(axis=1)
+print(df)
 
 # Calculate the mean for each subject and insert a row 'Subject Mean'
-subject_mean = df[['Quiz_1', 'In_Sem_1', 'Quiz_2', 'In_Sem_2']].mean()
+subject_mean = df[['Quiz_1', 'In_Sem_1', 'Quiz_2', 'In_Sem_2']].mean(axis=0)
 subject_mean_row = pd.DataFrame({'Name': ['Subject Mean'], 
                                  'Quiz_1': [subject_mean['Quiz_1']], 
                                  'In_Sem_1': [subject_mean['In_Sem_1']],
@@ -22,6 +23,4 @@ subject_mean_row = pd.DataFrame({'Name': ['Subject Mean'],
 #df = df.append(pd.Series({'Name': 'Subject Mean', **subject_means, 'Total': df['Total'].mean()}), ignore_index=True)
 
 df = pd.concat([df, subject_mean_row], ignore_index=True)
-
-# Display the resulting data frame
 print(df)
