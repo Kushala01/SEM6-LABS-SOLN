@@ -38,3 +38,6 @@ print(data)  # Printing the DataFrame with the 'bmi' column added
 # Exporting the DataFrame to a CSV file with tab separator
 data.to_csv("ans.csv", sep='\t')
 # data.to_csv("ans.txt", sep='\t')  # This line is commented out to prevent writing to a text file
+
+# Assigning custom column names
+#df.columns = ['preg', 'glu', 'bp', 'sft', 'ins', 'bmi', 'dpf', 'age', 'class']

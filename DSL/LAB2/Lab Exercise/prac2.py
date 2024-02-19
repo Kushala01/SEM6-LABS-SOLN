@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 from IPython.display import display
 
 # Load data from a CSV file into a DataFrame
@@ -26,6 +27,7 @@ print(replaced_row)
 
 # Remove the 'name' column from the DataFrame
 remove_col = data.drop('name', axis=1)
+#data.drop('name',axis=1,inplace='True')
 print(remove_col)
 
 # Print the original DataFrame to show it's unchanged
@@ -74,3 +76,44 @@ print(data['name'])
 
 # Select the 'name' and 'bmi' columns of the DataFrame, with the first row
 print(data[['name', 'bmi']][:1])
+
+dates = pd.date_range('20130101', periods=10)
+print(dates)
+
+df=pd.DataFrame(np.random.randn(10,4),index=dates,columns=list('ABCD'))
+print(df)
+print(df[df['A']>0])
+
+#df.loc[row_indexer, column_indexer]
+#loc=label based and iloc integer based
+#len(df)=row/len(df.columns)
+df.loc[:,'D']=np.array([5]*len(df))
+print(df)
+
+# Dropping a row by index
+#df.drop(index=0, inplace=True)  # Drops the row at index 0
+
+# Dropping multiple rows by label
+#df.drop(labels=['row_label1', 'row_label2'], inplace=True)  # Drops rows with labels 'row_label1' and 'row_label2'
+dates_df=pd.DataFrame(dates)
+ts=pd.Timestamp('20130104')
+df_new=pd.concat([df,dates_df],axis=1)
+print(df_new)
+print(df_new.shape)
+
+# Scatter plot of 'bmi' against 'glu'
+plt.scatter(df['bmi'], df['glu'])
+plt.xlabel('BMI')
+plt.ylabel('Glucose')
+plt.title('Scatter Plot: BMI vs Glucose')
+plt.show()
+
+# Histogram for the 'age' column
+df['age'].hist()
+plt.xlabel('Age')
+plt.ylabel('Frequency')
+plt.title('Histogram: Age Distribution')
+plt.show()
+
+G = pd.read_excel('xyz.xlsx', sheet_name='Sheet1')
+print(G.head())
