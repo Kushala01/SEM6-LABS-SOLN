@@ -1,14 +1,13 @@
 import socket
-
-host = socket.gethostname()
-port = 12345
-
-sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-sock.connect((host, port))
-
+s=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
+host=socket.gethostname()
+port=4343
+#s.bind((host,port))
 while True:
-    msg = input("Enter a message to send: ")
-    sock.send(msg.encode())
-    data = sock.recv(1024)
-    print("Server sent: ", data.decode())
+    sendmsg=input('send your msg')
+    s.sendto(sendmsg.encode(),(host,port))
+    msg,addr=s.recvfrom(1024)
+    if not msg:
+        break
+    print('cli says: ',msg.decode())
+s.close()
