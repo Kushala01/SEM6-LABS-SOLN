@@ -1,11 +1,8 @@
 import pandas as pd
-data={'name':['Alice', 'Bob', 'Charlie', 'David'],
-      'hieght':[160, 175, 162, 168],
-      'qaulification':['Bachelor', 'Master', 'PhD', 'Bachelor']}
+data = {'Name': ['Annie', 'Diya', 'Charles', 'James', 'Emily'],
+        'Quiz_1': [8.0, 9.0, 7.5, 8.5, 6.5],
+        'In_Sem_1': [11.0, 14.0, 14.5, 13.0, 12.5],
+        'Quiz_2': [9.5, 6.5, 8.5, 9.0, 9.0],
+        'In_Sem_2': [12.5, 13.5, 14.5, 15.0, 13.0]}
 df=pd.DataFrame(data)
-address_list=['123 Main St', '456 Oak St', '789 Elm St', '321 Pine St']
-df['address']=address_list
-print(df)
-age_list = [23, 28, 25, 22]
-df.insert(loc=2,column='age',value=age_list)
-print(df)
+df['total']=df[['Name','Quiz_1']].sum(axis=0)

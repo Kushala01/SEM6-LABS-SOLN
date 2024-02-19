@@ -42,10 +42,10 @@ print(remove_row)
 print(type(data))
 
 # Define a new row of data
-new_row = {'name': 'kushu', 'hieght': 121, 'weight': 33, 'bmi': 12}
+new_row = {'name': ['kushu','biyc'], 'hieght': [121,13], 'weight': [33,44], 'bmi': [12,33]}
 
 # Append the new row to the DataFrame
-new_row_added = pd.concat([data, pd.DataFrame([new_row])], ignore_index=True)
+new_row_added = pd.concat([data, pd.DataFrame(new_row)], ignore_index=True)
 print(new_row_added)
 
 # Drop duplicate rows based on the 'name' column
@@ -53,7 +53,7 @@ new_data = data.drop_duplicates(subset='name')
 
 # Create a new DataFrame with custom index labels
 df = pd.DataFrame(data, index=['rank1', 'rank2', 'rank3'])
-
+print(df)
 # Display the DataFrame with custom index labels
 display(df)
 
