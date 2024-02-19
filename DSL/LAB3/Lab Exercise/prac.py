@@ -1,4 +1,5 @@
 import numpy as np
+import random
 my_array=np.arange(8)
 print(my_array)
 print(type(my_array))
@@ -44,3 +45,8 @@ sorrt=np.sort(eye_array,axis=1)
 print(sorrt)
 sorrt=np.sort(eye_array,axis=0)
 print(sorrt)
+my_list=[1,2,3,4,5,6,7,8,9]
+print(random.choice(my_list))
+print(random.randrange(25,50))
+print(my_array.size)
+print(my_array.T)

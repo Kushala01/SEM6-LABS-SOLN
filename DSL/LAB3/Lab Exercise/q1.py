@@ -1,3 +1,4 @@
+#Write a program to find the factors of a given number (get input from user) using for loop.
 import numpy as np
 
 x = int(input("Enter the number : "))
