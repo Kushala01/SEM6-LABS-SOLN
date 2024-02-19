@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from IPython.display import display
+import matplotlib.pyplot as plt
 
 # Load data from a CSV file into a DataFrame
 data = pd.read_csv("ans.csv", sep='\t')
@@ -102,18 +103,31 @@ print(df_new)
 print(df_new.shape)
 
 # Scatter plot of 'bmi' against 'glu'
-plt.scatter(df['bmi'], df['glu'])
+'''plt.scatter(df['bmi'], df['glu'])
 plt.xlabel('BMI')
 plt.ylabel('Glucose')
 plt.title('Scatter Plot: BMI vs Glucose')
-plt.show()
+plt.show()'''
 
 # Histogram for the 'age' column
-df['age'].hist()
+'''df['age'].hist()
 plt.xlabel('Age')
 plt.ylabel('Frequency')
 plt.title('Histogram: Age Distribution')
-plt.show()
+plt.show()'''
 
 G = pd.read_excel('xyz.xlsx', sheet_name='Sheet1')
 print(G.head())
+
+H=pd.read_table('HR.txt')
+f=H['Department'].value_counts()
+f.plot(kind='bar')
+plt.title('Department Distribution')
+plt.xlabel('Department')
+plt.ylabel('Count')
+plt.show()
+
+f.plot(kind='pie')
+plt.title('Department Distribution (Pie Chart)')
+plt.axis('equal') # Equal aspect ratio ensures that the pie chart is circular.
+plt.show()
