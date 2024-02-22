@@ -44,10 +44,54 @@
 
 </style>
 </head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+  $("button").click(function(){
+    $(".test").hide();
+  });
+});
+</script>
 <body>
 <div style="position: absolute;left: 70px;">
-  <h1>Birthday Card</h1>
-  <p>Select a colo</p>
+  <h1>birthday card</h1>
+  <label for="bgclr">Select a color for background:</label>
+  <select id="colour" name="bgcolor">
+    <option value="red">red</option>
+    <option value="yellow">yellow</option>
+    <option value="pink">pink</option>
+    <option value="purple">purple</option>
+  </select>
+  <br>
+  <br>
+  <label for="font">Select a font:</label>
+  <select id="fontFor" name="Font">
+    <option value="Verdana">Verdana</option>
+    <option value="Times New Roman">Times New Roman</option>
+  </select>
+  <br>
+  <br>
+  <p>select font size</p>
+  <input type="text">
+  <br>
+  <br>
+  <p>select bordcer style</p>
+  <input type="radio" id="none" name="border_style" value="none">
+  <label for="none">none</label>
+  <input type="radio" id="single" name="border_style" value="single">
+  <label for="single">single</label>
+  <input type="radio" id="double" name="border_style" value="double">
+  <label for="double">double</label>
+  <br>
+  <br>
+  <input type="checkbox" id="image"  value="image">
+  <label for="image">add a default image</label>
+  <br>
+  <br>
+<p>enter the text to enter in the card</p>
+  <textarea name="message" rows="10" cols="30">Happy Birthday to </textarea>
+  <br>
+<br>
 <button class="button"><span>submit </span></button>
 </div>
 </body>
