@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leave Application Form</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+    }
+    form {
+        margin: 20px;
+    }
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin-top: 20px;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #f2f2f2;
+    }
+    #leaveRemaining {
+        margin-top: 20px;
+        display: none;
+    }
+</style>
+</head>
+<body>
+
+<form id="leaveForm">
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" required><br><br>
+    <label for="type">Leave Type:</label><br>
+    <select id="type" name="type" required>
+        <option value="Annual">Annual</option>
+        <option value="Sick">Sick</option>
+        <option value="Maternity">Maternity</option>
+        <!-- Add more leave types as needed -->
+    </select><br><br>
+    <label for="reason">Reason:</label><br>
+    <textarea id="reason" name="reason" required></textarea><br><br>
+    <label for="startDate">Start Date:</label><br>
+    <input type="date" id="startDate" name="startDate" required><br><br>
+    <label for="endDate">End Date:</label><br>
+    <input type="date" id="endDate" name="endDate" required><br><br>
+    <button type="submit">Submit</button>
+</form>
+
+<div id="leaveRemaining">
+    <h2>Leave Remaining</h2>
+    <table>
+        <tr>
+            <th>Leave Type</th>
+            <th>Remaining</th>
+        </tr>
+        <tr>
+            <td>Annual</td>
+            <td id="remainingAnnual">12</td>
+        </tr>
+        <tr>
+            <td>Sick</td>
+            <td id="remainingSick">12</td>
+        </tr>
+        <tr>
+            <td>Maternity</td>
+            <td id="remainingMaternity">12</td>
+        </tr>
+        <!-- Add more rows for additional leave types -->
+    </table>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#leaveForm').submit(function(event) {
+            event.preventDefault();
+            var formData = $(this).serializeArray();
+            var tableRow = '<tr>';
+            $.each(formData, function(index, field) {
+                tableRow += '<td>' + field.value + '</td>';
+            });
+            tableRow += '</tr>';
+            $('#leaveTable tbody').append(tableRow);
+            updateRemainingLeaves(formData);
+            $(this).trigger("reset");
+            $('#leaveRemaining').slideDown();
+        });
+
+        function updateRemainingLeaves(formData) {
+            var type = formData.find(field => field.name === 'type').value;
+            var remainingLeave = parseInt($('#remaining' + type).text(), 10);
+            $('#remaining' + type).text(remainingLeave - 1);
+        }
+    });
+</script>
+
+<table id="leaveTable">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Reason</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+</body>
+</html>
