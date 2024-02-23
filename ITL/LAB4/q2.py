@@ -1,3 +1,4 @@
+#given array whose sum equals a specific target number
 class q2:
     def __init__(self, arr):
         self.arr = arr  # Store the input array as an attribute of the object

@@ -1,3 +1,4 @@
+#get all possible unique subsets from a set of distinct integers Input:[4,5,6] 
 class Powerset:
     def find(self, arr):
         n = len(arr)  # Determine the number of elements in the input array
