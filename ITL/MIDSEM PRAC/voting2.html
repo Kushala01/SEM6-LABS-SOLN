@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subject Polling</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    .subject-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+    .subject {
+      margin-bottom: 20px;
+      margin-right: 10px; /* Adjust spacing between subjects */
+      text-align: center;
+    }
+    .subject img {
+      max-width: 200px;
+      display: block; /* Ensure image occupies full width */
+      margin-bottom: 10px; /* Add spacing between image and button */
+    }
+    .red-text {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Subject Polling</h1>
+    <div class="subject-container">
+      <div class="subject">
+        <img src="img1.jpg" alt="Deep Learning">
+        <button class="btn btn-primary vote-btn">Vote</button>
+        <span class="votes">5</span>
+      </div>
+      <div class="subject">
+        <img src="img2.jpg" alt="Software Testing and Analysis">
+        <button class="btn btn-primary vote-btn">Vote</button>
+        <span class="votes">5</span>
+      </div>
+      <div class="subject">
+        <img src="img3.jpg" alt="Digital Image Processing">
+        <button class="btn btn-primary vote-btn">Vote</button>
+        <span class="votes">5</span>
+      </div>
+    </div>
+    <button id="submit-btn" class="btn btn-success">Submit</button>
+    <div id="results"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $(".vote-btn").click(function() {
+        var votesSpan = $(this).siblings(".votes");
+        var currentVotes = parseInt(votesSpan.text());
+        votesSpan.text(currentVotes + 1);
+      });
+
+      $("#submit-btn").click(function() {
+        var resultsHTML = "<h2>Votes Results</h2>";
+        $(".subject").each(function() {
+          var votes = parseInt($(this).find(".votes").text());
+          var subjectName = $(this).find("img").attr("alt");
+          if (votes > 10) {
+            resultsHTML += "<p>" + subjectName + ": " + votes + " votes</p>";
+            $(this).removeClass("red-text"); // Remove red text if votes exceed 10
+          } else {
+            $(this).addClass("red-text");
+            resultsHTML += "<p>" + subjectName + " is not offered this semester</p>";
+          }
+        });
+        $("#results").html(resultsHTML);
+      });
+    });
+  </script>
+</body>
+</html>

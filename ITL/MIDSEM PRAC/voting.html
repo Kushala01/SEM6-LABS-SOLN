@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Class Timetable</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            var v1 = 5;
+            var v2 = 5;
+            var v3 = 5;
+
+            $("#vote1").click(function(){
+                v1 = v1+1;
+            });
+            $("#vote2").click(function(){
+                v2 = v2+1;
+            });
+            $("#vote3").click(function(){
+                v3 = v3+1;
+            });
+            $("#Submit").click(function(){
+                var den = " is not offered this semester<br>";
+                var res = "<br><h4>Votes Results</h4><br> <b>Deep Learning:</b> "+v1+" votes";
+                var rest = "";
+                if (v1<10){
+                    rest = rest+"Deep Learning"+den;
+                }
+                res = res+"<br><b>Software Testing and Analysis:</b> "+v2+" votes";
+                if (v2<10){
+                    rest = rest+"Software Testing and Analysis"+den;
+                }
+                res = res+"<br><b>Digital Image Processing:</b> "+v3+" votes<br>";
+                if (v3<10){
+                    rest = rest+"Digital Image Processing"+den;
+                }
+                $('#result').html(res+"<code>"+rest+"</code>");
+            })
+        });
+    </script>
+</head>
+
+<body class="p-5 bg-dark text-light">
+    <div class="container">
+    <h1 class="text-center">Elective Subjects Preference Poll</h1>
+        <div class="row m-5">
+            <div class="col text-center text-wrap">
+            <h4><b>Deep Learning</b></h4><br><br>
+                <div class="row">
+                    <div class="col-9">
+                        <img src="img1.jpg" width="200px" height="300px">
+                    </div>
+                    <div class="col-3">
+                        <div class="col d-flex justify-content-center align-items-center">
+                            <button id="vote1" class="btn btn-info">Vote</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center text-wrap">
+                <h4><b>Software Testing and Analysis</b></h4><br><br>
+                <div class="row">
+                    <div class="col-9">
+                        <img src="img2.jpg" width="200px" height="300px">
+                    </div>
+                    <div class="col-3">
+                        <button id="vote2" class="btn btn-info">Vote</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col text-center text-wrap">
+            <h4><b>Digital Image Processing</b></h4><br><br>
+                <div class="row">
+                    <div class="col-9">
+                        <img src="img3.jpg" width="200px" height="300px">
+                    </div>
+                    <div class="col-3">
+                        <button id="vote3" class="btn btn-info">Vote</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row m-5">
+            <button id="Submit" class="btn btn-outline-info">Submit votes</button>
+        </div>
+        
+        <div id="result"></div>
+</div>
+</body>
+</html>
