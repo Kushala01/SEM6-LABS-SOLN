@@ -1,3 +1,4 @@
+#Write a python program to reverse a content a file and store it in another file
 import sys
 def reverse(file_r,file_w):
     f1 = open(file_r,'r')

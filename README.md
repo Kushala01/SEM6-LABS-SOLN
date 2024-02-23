@@ -12,3 +12,8 @@ https://getbootstrap.com/docs/5.0/utilities/background/
 https://www.w3schools.com/bootstrap4/bootstrap_badges.asp
 https://mdbootstrap.com/docs/b4/jquery/utilities/horizontal-align/
 https://getbootstrap.com/docs/4.0/utilities/text/
+
+https://copilot.microsoft.com/
+
+https://www.codehim.com/category/bootstrap/
+https://www.codehim.com/category/collections/

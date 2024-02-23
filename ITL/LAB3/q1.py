@@ -1,3 +1,4 @@
+#WAP to implement simple calculator which perform addition,subtraction, multiplication, and division.
 a = int(input('Enter first number: '))
 b = int(input('Enter second number: '))
 c = int(input('Enter 1 for Addition, 2 for Subtraction, 3 for Multiplication, 4 for Division \n'))

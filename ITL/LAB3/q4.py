@@ -1,3 +1,4 @@
+#Write a python program to sort words in alphabetical order
 str = input('Enter a sentence with words: ')
 words = str.split(' ')
 for i in range(len(words)-1):
