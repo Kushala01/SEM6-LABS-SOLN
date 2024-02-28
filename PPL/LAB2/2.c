@@ -1,27 +1,23 @@
-#include <mpi.h>
-#include <stdio.h>
-#include <stdlib.h>
-#define SIZE sizeof(int)
+#include<stdio.h>
+#include<stdlib.h>
+#include<mpi.h>
+#define MCW MPI_COMM_WORLD
 
-int main (int argc, char *argv []){
-    int size, rank;
+int main(int argc, char ** argv){
+    MPI_Init(&argc,&argv);
+    int rank,size;
+    int num=23;
     MPI_Status status;
-    MPI_Init(&argc, &argv);
-    MPI_Comm_size(MPI_COMM_WORLD, &size);
-    MPI_Comm_rank(MPI_COMM_WORLD, &rank);
-
-    int *number = (int *)malloc(SIZE);
-    int i;
-    
-    if (rank == 0) {
-        *number = rand() % 10 + 1;
-        for (i = 1; i < size; ++i) {
-            printf("%d. Sent to %d: %d\n", rank, i, *number);
-            // Send to the process with ID = i
-            MPI_Send(number, SIZE, MPI_INT, i, 100 + i, MPI_COMM_WORLD);
+    MPI_Comm_rank(MCW,&rank);
+    MPI_Comm_size(MCW,&size);
+    if(rank==0){
+        for(int i=0;i<size;i++){
+            MPI_Send(&num,1,MPI_INT,i,100+i,MCW);
+            printf("\nsent: %d to process %d\n",num,i);
         }
-    }else{// Revc from the process with ID = 0
-        MPI_Recv(number, SIZE, MPI_INT, 0, 100 + rank, MPI_COMM_WORLD, &status);
-        printf("%d. Recv: %d\n", rank, *number);
+    }else{
+        MPI_Recv(&num,1,MPI_INT,0,100+rank,MCW,&status);
+        printf("\nProcess: %d received: %d\n",rank,num);
     }MPI_Finalize();
+    return 0;
 }

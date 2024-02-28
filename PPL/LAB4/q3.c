@@ -11,7 +11,8 @@ void error(int ierr){
        MPI_Error_class(ierr,&errclass);
        MPI_Error_string(ierr,err_buffer,&resultlen);
        fprintf(stderr, "Error class %d: %s", errclass, err_buffer);
-       MPI_Finalize();             
+       MPI_Finalize(); 
+       exit(1);            
     }
 }
 

@@ -1,7 +1,7 @@
 #include <mpi.h>
 #include <stdio.h>
 #include <string.h>
-#define MPI_COMM_WORLD MCW
+#define MCW MPI_COMM_WORLD
 
 int main(int argc, char* argv[]) {
     int rank, size;

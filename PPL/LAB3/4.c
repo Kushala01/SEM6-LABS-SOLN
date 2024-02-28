@@ -8,7 +8,6 @@ int main(int argc, char* argv []) {
     char b[200], str1[100], str2[100], c1[100], c2[100], concatted[200];
     int i, m;
     MPI_Init(&argc, &argv);
-
     MPI_Comm_rank(MCW, &rank);
     MPI_Comm_size(MCW, &size);
     
@@ -32,6 +31,5 @@ int main(int argc, char* argv []) {
     
     if (rank == 0)
         printf("Concatted: %s\n", b);
-        
     MPI_Finalize();
 }

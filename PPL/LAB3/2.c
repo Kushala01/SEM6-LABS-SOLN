@@ -2,7 +2,7 @@
 #include <stdio.h>
 #define MAX_M 100
 #define MAX_N 100
-#define MPI_COMM_WORLD MCW
+#define MCW MPI_COMM_WORLD
 
 int main(int argc, char *argv[]) {
     int rank, size;

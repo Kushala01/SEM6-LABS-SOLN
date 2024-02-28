@@ -1,0 +1,7 @@
+
+prac:15512 terminated with signal 11 at PC=7f394f48063b SP=7ffd6a9f1f40.  Backtrace:
+/lib/x86_64-linux-gnu/libc.so.6(gets+0x11b)[0x7f394f48063b]
+./prac(+0x134b)[0x55ac1c59734b]
+/lib/x86_64-linux-gnu/libc.so.6(+0x29d90)[0x7f394f429d90]
+/lib/x86_64-linux-gnu/libc.so.6(__libc_start_main+0x80)[0x7f394f429e40]
+./prac(+0x1205)[0x55ac1c597205]
