@@ -1,0 +1,13 @@
+a	4
+v	2
+f	2
+hh	2
+fg	1
+tg	1
+fg	1
+gt	1
+nnn	1
+ccc	1
+ddd	1
+nnn	1
+ddd	1
