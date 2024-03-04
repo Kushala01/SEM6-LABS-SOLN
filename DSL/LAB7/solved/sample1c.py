@@ -1,5 +1,4 @@
 import socket
-
 def fetchServerClock():
     # Client socket creation
     client_socket = socket.socket()
