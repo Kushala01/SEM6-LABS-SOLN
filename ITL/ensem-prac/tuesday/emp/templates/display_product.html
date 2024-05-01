@@ -1,0 +1,21 @@
+{% extends 'index.html' %}
+{%block title%}Display Product{%endblock%}
+{%block content%}
+<p>Display Product</p>
+<table>
+	<tr>
+		<th>Product Name</th>
+		<th>Action</th>
+	</tr>
+	{% for product in products %}
+<tr>
+    <td>{{ product.name }}</td>
+    <td>
+        <a href="{% url 'product_detail' product.id %}">View details</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>
+<a href="{%url 'index'%}">go to home page</a>
+{%endblock%}

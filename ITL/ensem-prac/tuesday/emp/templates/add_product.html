@@ -1,0 +1,13 @@
+
+{%extends 'index.html'%}
+{%block title%}Add Product page{% endblock %}
+{%block content%}
+<p>Add products</p>
+<form action="{% url 'add_product'%}" method="post">
+    {%csrf_token%}
+    Product Name: <input type="text" name="name" /><br />
+    Price: <input type="number" name="price" /><br />
+    <input type="submit" value="add product" />
+</form>
+<a href="{% url 'index'%}">Go To Home Page</a>
+{% endblock %}

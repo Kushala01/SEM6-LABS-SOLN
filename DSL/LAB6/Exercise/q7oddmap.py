@@ -1,8 +1,7 @@
 import sys
 
 for line in sys.stdin:
- line = line.strip()
- words = line.split()
+ words = line.strip().split()
  for word in words:
     N = int(word)
     if N%2 == 1 and N > 0:

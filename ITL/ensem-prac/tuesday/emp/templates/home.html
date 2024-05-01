@@ -1,0 +1,9 @@
+{% extends 'index.html'%}
+{%block title%}Home Page{%endblock%}
+{%block contents%}
+<h2>home page</h2>
+<p>
+    <a href="{% url 'add_product' %}">Add Product</a><br>
+    <a href="{% url 'display_product'%}">Display Product</a><br>
+</p>
+{% endblock%}
